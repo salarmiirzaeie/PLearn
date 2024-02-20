@@ -1,20 +1,21 @@
 // stories/PrimaryButton.stories.tsx
 import type {Meta, StoryObj} from '@storybook/react';
 
-import PrimaryButton from './PrimaryButton';
+import Button from './Button';
 
 const meta = {
-  title: 'components/PrimaryButton',
-  component: PrimaryButton,
-} satisfies Meta<typeof PrimaryButton>;
+  title: 'components/Button',
+  component: Button,
+} satisfies Meta<typeof Button>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
-
 export const Basic: Story = {
   args: {
     title: 'Hello World',
-    color: '#004CFF',
+    onPress: () => {
+      console.log('object');
+    },
   },
 };
