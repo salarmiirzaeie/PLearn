@@ -1,6 +1,5 @@
 // PrimaryButton.tsx
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
 
 import {ButtonContainer, ButtonText} from '../../configs/styled-components';
 

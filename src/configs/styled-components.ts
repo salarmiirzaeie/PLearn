@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import styled from 'styled-components/native';
 
 interface IButtonProps {
@@ -16,4 +16,8 @@ export const ButtonText = styled(Text)<IButtonProps>`
   color: ${props => (props.color ? props.color : props.theme.colors.white)};
   font-size: 16px;
   text-align: center;
+`;
+export const Container = styled(View)`
+  flex: 1;
+  padding: 10px 20px;
 `;

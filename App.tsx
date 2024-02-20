@@ -1,11 +1,11 @@
 import React from 'react';
 import MainProvider from './src/providers/main-provider';
-import MainNavigation from './src/navigation/main-navigation/main-navigation';
+import RootNavigation from './src/routes/root-navigation/root-navigation';
 
 function App() {
   return (
     <MainProvider>
-      <MainNavigation />
+      <RootNavigation />
     </MainProvider>
   );
 }

@@ -2,7 +2,7 @@ import {View, Text} from 'react-native';
 import React from 'react';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import {persistor, store} from '../redux/store';
+import {persistor, store} from '../store/store';
 import {ThemeProvider} from 'styled-components/native';
 import theme from '../configs/theme';
 
