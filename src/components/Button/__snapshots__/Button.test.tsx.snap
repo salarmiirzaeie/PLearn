@@ -31,7 +31,7 @@ exports[`Button renders correctly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     {
-      "backgroundColor": "#004CFF",
+      "backgroundColor": "#65CAFF",
       "borderBottomLeftRadius": 10,
       "borderBottomRightRadius": 10,
       "borderTopLeftRadius": 10,

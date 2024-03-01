@@ -1,3 +1,3 @@
 export type mainStackParamList = {
-  Home: undefined;
+  TabNavigation: undefined;
 };
