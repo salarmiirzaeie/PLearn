@@ -1,10 +1,7 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import {
-  ButtonText,
-  SBoxContainer,
-  SButtonContainer,
-} from '../../../../configs/styled-components';
+import {ButtonText} from '../../../../configs/styled-components';
+import {SButtonContainer} from '../styles/styled-components';
 interface ISButtonProps {
   bg: string;
   title: string;

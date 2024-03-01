@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {tabNavigationParamList} from './tab-navigationType';
@@ -9,6 +9,7 @@ import Settings from '../../screens/main/Settings/Settings';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useTheme} from 'styled-components/native';
+import HomeHeader from '../../screens/main/Home/components/HomeHeader';
 const Tab = createBottomTabNavigator<tabNavigationParamList>();
 
 const TabNavigation = () => {
@@ -25,6 +26,7 @@ const TabNavigation = () => {
               size={25}
             />
           ),
+          header: () => <HomeHeader />,
         }}
         name="home"
         component={Home}
