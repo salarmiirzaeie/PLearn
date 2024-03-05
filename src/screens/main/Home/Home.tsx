@@ -12,8 +12,12 @@ import SBox from './components/SBox';
 import SButton from './components/SButton';
 import Heading from '../../../components/Text/Heading';
 import TopicsList from './components/TopicsList';
+import {
+  HomeScreenNavigationProp,
+  HomeScreenProps,
+} from '../../../routes/main-navigation/main-navigationType';
 
-const Home = () => {
+const Home: React.FC<HomeScreenProps> = ({navigation}) => {
   const theme = useTheme();
   return (
     <Container>
@@ -45,7 +49,7 @@ const Home = () => {
         <SButton bg={theme.colors.green} title="Repeat Words" />
       </RContainer>
       <Heading title="My progress in topics" />
-      <TopicsList />
+      <TopicsList navigation={navigation} />
     </Container>
   );
 };

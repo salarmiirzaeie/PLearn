@@ -10,6 +10,8 @@ const theme = {
     light: '#E6E6E6',
     gray: '#ccc',
     green: '#48BC01',
+    red: '#FF0000',
+    // ...
     // ... other colors
   },
   fonts: {

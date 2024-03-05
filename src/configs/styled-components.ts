@@ -29,6 +29,18 @@ export const Container = styled(ScrollView)`
   height: 100%;
   flex-direction: column;
 `;
+export const VContainer = styled(View)`
+  flex: 1;
+  padding: 10px 25px;
+  background-color: ${props => props.theme.colors.white};
+  flex-direction: column;
+`;
+export const Center = styled(View)`
+  flex: 1;
+  background-color: ${props => props.theme.colors.white};
+  justify-content: center;
+  align-items: center;
+`;
 export const RContainer = styled(View)`
   padding: 10px 0px;
   background-color: ${props => props.theme.colors.white};
