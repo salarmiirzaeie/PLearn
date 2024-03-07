@@ -5,11 +5,14 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {persistor, store} from '../store/store';
 import {ThemeProvider} from 'styled-components/native';
 import theme from '../configs/theme';
+import Tts from 'react-native-tts';
 
 interface Props {
   children: React.ReactNode;
 }
 const MainProvider: React.FC<Props> = ({children}) => {
+  Tts.setDefaultLanguage('de-DE');
+  Tts.setDefaultRate(0.5);
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>

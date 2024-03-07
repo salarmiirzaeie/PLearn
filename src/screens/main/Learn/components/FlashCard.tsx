@@ -1,54 +1,123 @@
 import {View, Text, Pressable} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   FlashCardContainer,
   FlashCardFooter,
-  FlashCardHeader,
   Word,
 } from './styles/styled-components';
-import {BText, Center, PText} from '../../../../configs/styled-components';
+import {
+  BText,
+  Center,
+  Container,
+  IconButton,
+  PText,
+} from '../../../../configs/styled-components';
 import CloseIcon from '../../../../components/icon/CloseIcon';
 import CheckIcon from '../../../../components/icon/CheckIcon';
 import {useTheme} from 'styled-components/native';
 import RotateIcon from '../../../../components/icon/RotateIcon';
 import VolumeIcon from '../../../../components/icon/VolumeIcon';
-import {
+import Animated, {
   Easing,
+  useAnimatedReaction,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
+  runOnJS,
 } from 'react-native-reanimated';
-
-const FlashCard = () => {
+import Tts from 'react-native-tts';
+interface IFlashCardProps {
+  item: {
+    word: string;
+    translate: string;
+    pronunciation: string;
+    example: string;
+  };
+  nextCard: () => void;
+}
+const FlashCard: React.FC<IFlashCardProps> = ({item}) => {
   const theme = useTheme();
-  const rotation = useSharedValue(0);
-
+  const rotationCard = useSharedValue(0);
+  const rotationContent = useSharedValue(0);
+  const [word, setWord] = useState(item.word);
+  const [showExamples, setShowExamples] = useState(false);
   const startRotationAnimation = () => {
-    rotation.value = withTiming(180, {duration: 1000, easing: Easing.linear});
+    rotationCard.value = withTiming(rotationCard.value === 0 ? 180 : 0, {
+      duration: 500,
+      easing: Easing.linear,
+    });
+    rotationContent.value = withTiming(rotationContent.value === 0 ? -180 : 0, {
+      duration: 500,
+      easing: Easing.linear,
+    });
   };
 
   const rotatingBoxStyle = useAnimatedStyle(() => {
     return {
-      transform: [{rotateY: `${rotation.value}deg`}],
+      transform: [{rotateY: `${rotationCard.value}deg`}],
+    };
+  });
+  const rotatingContentStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{rotateY: `${rotationContent.value}deg`}],
     };
   });
 
+  useAnimatedReaction(
+    () => rotationCard.value,
+    (newValue, oldValue) => {
+      if (newValue < 90) {
+        runOnJS(setWord)(item.word);
+      } else {
+        runOnJS(setWord)(item.translate);
+      }
+    },
+    [rotationCard],
+  );
+
+  const speakWords = () => {
+    Tts.speak('Guten Tag, wie geht es Ihnen?');
+  };
   return (
     <FlashCardContainer style={rotatingBoxStyle}>
-      <FlashCardHeader>
-        <VolumeIcon color={theme.colors.gray} size={30} />
+      {!showExamples ? (
+        <Center>
+          <Animated.View style={rotatingContentStyle}>
+            <Word>{word}</Word>
+            <PText
+              style={{marginTop: 10, textAlign: 'center'}}
+              color={theme.colors.gray}>
+              {item.pronunciation}
+            </PText>
+          </Animated.View>
+        </Center>
+      ) : (
+        <View style={{backgroundColor: theme.colors.white, flex: 1}}>
+          <Animated.View style={rotatingContentStyle}>
+            <BText color={theme.colors.black}>xsxs</BText>
+            <PText color={theme.colors.gray}>{item.example}</PText>
+          </Animated.View>
+        </View>
+      )}
 
-        <BText>EX</BText>
-      </FlashCardHeader>
-      <Center>
-        {rotation.value < 90 ? <Word>Word</Word> : <Word>معنی</Word>}
-      </Center>
-      <FlashCardFooter>
-        <CheckIcon color={theme.colors.green} size={30} />
-        <Pressable onPress={startRotationAnimation}>
+      <FlashCardFooter style={rotatingContentStyle}>
+        <Pressable
+          style={{padding: 10}}
+          onPress={() => setShowExamples(!showExamples)}>
+          <BText color={theme.colors.gray}>EX</BText>
+        </Pressable>
+
+        <Pressable
+          style={{padding: 10}}
+          onPress={() => {
+            startRotationAnimation();
+            setShowExamples(false);
+          }}>
           <RotateIcon color={theme.colors.gray} size={35} />
         </Pressable>
-        <CloseIcon color={theme.colors.red} size={30} />
+        <Pressable style={{padding: 10}} onPress={speakWords}>
+          <VolumeIcon color={theme.colors.gray} size={30} />
+        </Pressable>
       </FlashCardFooter>
     </FlashCardContainer>
   );
