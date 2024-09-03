@@ -12,7 +12,7 @@ import {useTheme} from 'styled-components/native';
 import HomeHeader from '../../screens/main/Home/components/HomeHeader';
 const Tab = createBottomTabNavigator<tabNavigationParamList>();
 
-const TabNavigation = () => {
+const TabNavigation = ({navigation}: any) => {
   const theme = useTheme();
   return (
     <Tab.Navigator tabBar={props => <TabBar {...props} />}>
@@ -26,7 +26,7 @@ const TabNavigation = () => {
               size={25}
             />
           ),
-          header: () => <HomeHeader />,
+          header: () => <HomeHeader navigation={navigation} />,
         }}
         name="home"
         component={Home}

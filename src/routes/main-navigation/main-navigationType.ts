@@ -7,6 +7,7 @@ import {tabNavigationParamList} from '../tab-navigation/tab-navigationType';
 export type mainStackParamList = {
   TabNavigation: undefined;
   Learn: undefined;
+  SelectLanguage: undefined;
 };
 
 export type HomeScreenNavigationProp = StackNavigationProp<

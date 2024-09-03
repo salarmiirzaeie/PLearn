@@ -11,8 +11,8 @@ interface Props {
   children: React.ReactNode;
 }
 const MainProvider: React.FC<Props> = ({children}) => {
-  Tts.setDefaultLanguage('de-DE');
-  Tts.setDefaultRate(0.5);
+  // Tts.setDefaultLanguage('de-DE');
+  // Tts.setDefaultRate(0.5);
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
